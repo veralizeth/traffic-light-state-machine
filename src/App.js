@@ -24,12 +24,9 @@ const GREEN_LIGHT = {
 
 
 const App = () => {
-  // Initially the light is Green
-  const [lightStatus, setLightStatus] = useState({
-    RedOn: false,
-    YellowOn: false,
-    GreenOn: true,
-  });
+  // Initially the light is Green 
+  // We dont need to have a specific hash here, since is the same of the GREEN_LIGHT
+  const [lightStatus, setLightStatus] = useState(GREEN_LIGHT);
 
   // Run once to setup the state machine
   useEffect(() => {
@@ -39,7 +36,15 @@ const App = () => {
       console.log(state);
       // Your code here to change lightStatus when the 
       //   state of the state machine changes
-
+      switch (state.value) {
+        case 'red': setLightStatus(GREEN_LIGHT);
+          break;
+        case 'green': setLightStatus(YELLOW_LIGHT);
+          break;
+        case 'yellow': setLightStatus(RED_LIGHT);
+          break;
+        default:
+      }
     });
   }, [])
 
